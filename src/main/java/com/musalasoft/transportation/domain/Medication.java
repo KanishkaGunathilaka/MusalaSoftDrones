@@ -1,14 +1,14 @@
 package com.musalasoft.transportation.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Builder
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Medication {
 
     @Id
@@ -23,4 +23,8 @@ public class Medication {
 
     @Lob
     private byte[] image;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="id", insertable = false, updatable = false)
+    private Drone drone;
 }

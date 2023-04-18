@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,4 +27,6 @@ public class DroneDTO {
     private Double capacity;
 
     private State state;
+
+    private List<MedicationDTO> medicationDTOList;
 }

@@ -1,17 +1,16 @@
 package com.musalasoft.transportation.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Builder
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Drone {
 
     @Id
@@ -27,4 +26,7 @@ public class Drone {
     private Double capacity;
 
     private State state;
+
+    @OneToMany(mappedBy="drone")
+    private List<Medication> medicationList;
 }

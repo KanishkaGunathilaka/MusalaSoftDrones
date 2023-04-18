@@ -13,5 +13,6 @@ create table medication (
     name varchar(128),
     weight double,
     code varchar(128),
-    image longblob
+    image longblob,
+    drone bigint references drone (id)
 );

@@ -4,14 +4,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Builder
 @Getter
 @Setter
-public class DroneMedication {
+public class BatteryLevelDTO {
 
-    private long droneId;
-
-    private List<Long> medicationList;
+    private Double batteryLevel;
 }
