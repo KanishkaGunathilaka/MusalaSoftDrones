@@ -14,6 +14,8 @@ import java.util.List;
 @Builder
 public class DroneDTO {
 
+    private long id;
+
     @Length(max = 100)
     @NotBlank
     private String serialNumber;

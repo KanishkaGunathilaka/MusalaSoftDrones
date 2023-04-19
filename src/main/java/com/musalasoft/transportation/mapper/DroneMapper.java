@@ -21,6 +21,7 @@ public class DroneMapper {
     public static DroneDTO mapToDroneDto(Drone drone) {
 
         return DroneDTO.builder()
+                .id(drone.getId())
                 .serialNumber(drone.getSerialNumber())
                 .model(drone.getModel())
                 .state(drone.getState())

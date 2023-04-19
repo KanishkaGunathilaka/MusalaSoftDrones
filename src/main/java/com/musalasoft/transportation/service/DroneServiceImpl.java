@@ -5,7 +5,6 @@ import com.musalasoft.transportation.exceptions.ConditionNotMetException;
 import com.musalasoft.transportation.exceptions.RecordNotFoundException;
 import com.musalasoft.transportation.mapper.DroneMapper;
 import com.musalasoft.transportation.repository.DroneRepository;
-import com.musalasoft.transportation.repository.MedicationService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -67,9 +66,15 @@ public class DroneServiceImpl implements DroneService {
                 .mapToDouble(medication -> medication.getWeight())
                 .sum();
 
-        Double medicationWeightDroneAlreadyHas = drone.getMedicationList().stream()
-                .mapToDouble(d -> d.getWeight())
-                .sum();
+        Double medicationWeightDroneAlreadyHas = 0.0;
+
+        if(drone.getMedicationList() != null) {
+            medicationWeightDroneAlreadyHas = drone.getMedicationList().stream()
+                    .mapToDouble(d -> d.getWeight())
+                    .sum();
+        }
+
+        medicationList.stream().forEach(medication -> medication.toBuilder().drone(drone).build());
 
         Double totalWeight = medicationTotalWeight + medicationWeightDroneAlreadyHas;
 
@@ -77,9 +82,15 @@ public class DroneServiceImpl implements DroneService {
             throw new ConditionNotMetException("Medications are heavier than drone can carry");
         }
 
-        drone.getMedicationList().addAll(medicationList);
+        List<Medication> medications = drone.getMedicationList();
+        medications.addAll(medicationList);
 
-        drone.setState(State.LOADING);
+        drone.toBuilder()
+                .state(State.LOADING)
+                .medicationList(medications)
+                .build();
+
+        medicationService.saveMedicationList(medicationList);
         droneRepository.save(drone);
         Optional<Drone> updatedDrone = droneRepository.findById(droneMedication.getDroneId());
 

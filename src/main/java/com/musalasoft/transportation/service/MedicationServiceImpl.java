@@ -1,12 +1,13 @@
-package com.musalasoft.transportation.repository;
+package com.musalasoft.transportation.service;
 
 import com.musalasoft.transportation.domain.Medication;
+import com.musalasoft.transportation.repository.MedicationRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class MedicationServiceImpl implements MedicationService{
+public class MedicationServiceImpl implements MedicationService {
 
     private final MedicationRepository medicationRepository;
 
@@ -17,5 +18,10 @@ public class MedicationServiceImpl implements MedicationService{
     @Override
     public List<Medication> getMedicationList(List<Long> ids) {
         return medicationRepository.findAllByIdIn(ids);
+    }
+
+    @Override
+    public List<Medication> saveMedicationList(List<Medication> medicationList) {
+        return medicationRepository.saveAll(medicationList);
     }
 }

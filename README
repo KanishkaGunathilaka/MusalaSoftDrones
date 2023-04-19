@@ -1,0 +1,35 @@
+To run tests
+./gradlew test
+
+To build
+./gradlew build
+
+
+1). Register drone
+
+post: localhost:8085/drone/
+{
+    "serialNumber":"23gh",
+    "model" : "LIGHTWEIGHT",
+    "weight":500,
+    "capacity":50.5,
+    "state":"LOADING"
+}
+
+2). Get available drones
+get: localhost:8085/drone/available-drones
+
+3). Load medicine to a drone
+post: localhost:8085/drone/load-medications
+{
+    "droneId": 1,
+    "medicationList" : [
+        3
+    ]
+}
+
+4). Get medications for a drone
+get: localhost:8085/drone/1
+
+5). Get battery level for a drone
+get: localhost:8085/drone/battery-level/1

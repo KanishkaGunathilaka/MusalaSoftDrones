@@ -1,7 +1,6 @@
 package com.musalasoft.transportation.service;
 
 import com.musalasoft.transportation.domain.BatteryLevelDTO;
-import com.musalasoft.transportation.domain.Drone;
 import com.musalasoft.transportation.domain.DroneDTO;
 import com.musalasoft.transportation.domain.DroneMedication;
 
